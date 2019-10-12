@@ -107,25 +107,59 @@ class SinglyLinkedList(object):
 
 
 
-# 	def erase(self,key):
-# 		"""doc string"""
-# 		pass
+	def erase(self,key):
+		"""doc string"""
+		current_node = self.head
+		if self.head is None:
+			return "list is empty"
+		else:
+			while current_node.next:
+				if current_node.next.key == key:
+					current_node.next = current_node.next.next
+					break
+				current_node = current_node.next
 
-# 	def isEmpty(self):
-# 		"""doc string"""
-# 		pass
 
-# 	def addBefore(self,key):
-# 		"""doc string"""
-# 		pass
+	def isEmpty(self):
+		"""doc string"""
+		return bool(self.head)
 
-# 	def addAfter(self,key):
-# 		"""doc string"""
-# 		pass
+	def addBefore(self, node_key, key):
+		"""doc string"""
+		node = Node(key)
+		current_node = self.head
+		if self.head is None:
+			return "list is empty"
+		else:
+			while current_node.next:
+				if current_node.next.key == node_key:
+					node.next = current_node.next
+					current_node.next = node
 
-# 	def __str__(self):
-# 		"""doc string"""
-# 		pass
+				current_node = current_node.next
+
+
+	def addAfter(self, node_key, key):
+		"""doc string"""
+		if self.head is None:
+			return "list is empty"
+		else:
+			while current_node.next:
+				if current_node.key == node_key:
+					node.next = current_node.next
+					current_node.next = node
+
+				current_node = current_node.next
+
+	def __str__(self):
+		""" Print keys of every node """
+		current_node = self.head
+		if self.head is None:
+			return "list is empty"
+		else:
+			while current_node:
+				print(current_node.key)
+				current_node = current_node.next
 
 # 	def __repr__(self):
 # 		"""doc string"""
