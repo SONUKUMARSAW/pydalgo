@@ -43,7 +43,7 @@ class SinglyLinkedList(object):
 
 	def popFront(self):
 		"""doc string"""
-		if self.head:
+		if self.head is not None:
 			self.head = self.head.next
 		else:
 			print("list is empty")
@@ -70,12 +70,6 @@ class SinglyLinkedList(object):
 				current_node = current_node.next
 			return current_node.key
 
-	def printD(self):
-		current_node = self.head
-		while current_node.next:
-			print(self.head.key)
-			current_node = current_node.next
-
 	def popBack(self):
 		""" Pop up the end node """
 		current_node = self.head
@@ -83,6 +77,9 @@ class SinglyLinkedList(object):
 		if self.head is None:
 			print("list is empty")
 			return None
+
+		elif self.head.next is None:
+			self.head = None
 
 		else:
 			while current_node.next.next:
@@ -100,7 +97,7 @@ class SinglyLinkedList(object):
 		if self.head is None:
 			return "List is empty"
 		else:
-			while current_node.next:
+			while current_node:
 				c+=1
 				if current_node.key == key:
 					return c
@@ -110,25 +107,59 @@ class SinglyLinkedList(object):
 
 
 
-# 	def erase(self,key):
-# 		"""doc string"""
-# 		pass
+	def erase(self,key):
+		"""doc string"""
+		current_node = self.head
+		if self.head is None:
+			return "list is empty"
+		else:
+			while current_node.next:
+				if current_node.next.key == key:
+					current_node.next = current_node.next.next
+					break
+				current_node = current_node.next
 
-# 	def isEmpty(self):
-# 		"""doc string"""
-# 		pass
 
-# 	def addBefore(self,key):
-# 		"""doc string"""
-# 		pass
+	def isEmpty(self):
+		"""doc string"""
+		return bool(self.head)
 
-# 	def addAfter(self,key):
-# 		"""doc string"""
-# 		pass
+	def addBefore(self, node_key, key):
+		"""doc string"""
+		node = Node(key)
+		current_node = self.head
+		if self.head is None:
+			return "list is empty"
+		else:
+			while current_node.next:
+				if current_node.next.key == node_key:
+					node.next = current_node.next
+					current_node.next = node
 
-# 	def __str__(self):
-# 		"""doc string"""
-# 		pass
+				current_node = current_node.next
+
+
+	def addAfter(self, node_key, key):
+		"""doc string"""
+		if self.head is None:
+			return "list is empty"
+		else:
+			while current_node.next:
+				if current_node.key == node_key:
+					node.next = current_node.next
+					current_node.next = node
+
+				current_node = current_node.next
+
+	def __str__(self):
+		""" Print keys of every node """
+		current_node = self.head
+		if self.head is None:
+			return "list is empty"
+		else:
+			while current_node:
+				print(current_node.key)
+				current_node = current_node.next
 
 # 	def __repr__(self):
 # 		"""doc string"""
@@ -136,33 +167,37 @@ class SinglyLinkedList(object):
 
 s = SinglyLinkedList()
 s.pushFront(1)
-
-print("1______")
 print(s.topFront())
-print(s.topBack())
 s.pushFront(2)
-print("2___1_____")
 print(s.topFront())
-print(s.topBack())
-s.pushBack(3)
-s.pushBack(4)
-s.pushFront(5)
-print("5__2___1___3__4")
-
+s.pushFront(3)
 print(s.topFront())
-print(s.topBack())
-s.popBack()
-print("5__2___1___3__")
-print(s.topFront())
-print(s.topBack())
 s.popFront()
-print("2___1_____3")
+print(s.topFront())
+s.popFront()
+print(s.topFront())
+s.popFront()
+print(s.topFront())
+s.pushBack(5)
+print(s.topBack())
+s.pushBack(6)
+s.pushBack(7)
+
+print("_______")
+print(s.find(7))
+print("_______")
+print(s.topBack())
+print(s.topFront())
+s.popBack()
+print(s.topBack())
+print(s.topFront())
+s.popBack()
+print(s.topBack())
+print(s.topFront())
+s.popBack()
+
 print(s.topFront())
 print(s.topBack())
-print(s.find(3))
-
-# print(s.topFront())
-# print(s.topBack())
 
 
 # print("I am 2 and key is {}".format(s.head.key))
